@@ -39,9 +39,10 @@ class CarController:
             dist_to_stop = pos_val * cfg["sign"] - cfg["stop_pos"] * cfg["sign"]
             
             should_stop = False
-            # If distance to stop is small and approaching, stop
-            if state == "RED" and 0 < dist_to_stop < 2.5:
-                # To prevent cars overlapping, check distance to other cars ahead
+            # Cars should start braking if they see RED *or* YELLOW ahead if they haven't crossed yet
+            stop_condition = state in ["RED", "YELLOW"]
+            if stop_condition and 0 < dist_to_stop < 2.5:
+                # To prevent cars overlapping
                 should_stop = True
                 
             # A simple collision avoidance for cars in the same lane

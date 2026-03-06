@@ -16,5 +16,7 @@ class TrafficLight(Entity):
         self.state = state
         if state == "GREEN":
             self.color = color.green
+        elif state == "YELLOW":
+            self.color = color.yellow
         else:
             self.color = color.red
